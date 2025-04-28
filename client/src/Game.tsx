@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useEffect, useCallback } from "react";
 import { WalletAccount } from "./wallet-account";
 import {
     useDojoSDK,
@@ -7,10 +7,9 @@ import {
     useModel,
 } from "@dojoengine/sdk/react";
 import { KeysClause, ToriiQueryBuilder } from "@dojoengine/sdk";
-import { ModelsMapping, Player } from "./typescript/models.gen";
+import { ModelsMapping } from "./typescript/models.gen";
 import { addAddressPadding, CairoCustomEnum } from "starknet";
 import { useAccount } from "@starknet-react/core";
-import { hexToAscii } from "@dojoengine/utils";
 
 const GRID_SIZE = 8;
 const CELL_SIZE_PX = 40; // Size of each cell in pixels for visualization
