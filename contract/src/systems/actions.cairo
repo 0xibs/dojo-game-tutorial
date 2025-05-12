@@ -28,6 +28,7 @@ pub mod actions {
 
     #[abi(embed_v0)]
     impl ActionsImpl of IActions<ContractState> {
+        // Create a new player and set their initial position and bag position 
         fn spawn(ref self: ContractState) {
             // Get the default world.
             let mut world = self.world_default();
@@ -45,7 +46,7 @@ pub mod actions {
             world.write_model(@new_position);
         }
 
-        // Implementation of the move function for the ContractState struct.
+       // Move a player from current position to another position
         fn move(ref self: ContractState, direction: Direction) {
             // Get the address of the current caller, possibly the player's address.
 
@@ -55,6 +56,7 @@ pub mod actions {
 
             let mut player: Player = world.read_model(caller);
 
+            // Player with score = 0 has not yet spawned
             assert(player.score > 0, 'Player needs to spawn');
 
             let mut position: Position = world.read_model(caller);
@@ -65,12 +67,13 @@ pub mod actions {
             // Write the new position to the world.
             world.write_model(@next_position);
 
-
             // Player hits the bag
             if (next_position.vec.x == player.next_bag.x
                 && next_position.vec.y == player.next_bag.y) {
+                // Get next random position for player
                 let (x, y) = self.get_random_position(player);
 
+                // Update player
                 player.next_bag.x = x;
                 player.next_bag.y = y;
                 player.score += 1;

@@ -1,9 +1,10 @@
-import { createDojoConfig } from "@dojoengine/core";
+import { createDojoConfig, LOCAL_KATANA, LOCAL_TORII } from "@dojoengine/core";
 
-import manifest from "../contract/manifest_release.json";
+import manifestRelease from "../contract/manifest_release.json";
+import manifestDev from "../contract/manifest_dev.json";
 
 export const dojoConfig = createDojoConfig({
-    manifest,
-    toriiUrl: "https://api.cartridge.gg/x/my-dojo-game-96a2z1/torii",
-    rpcUrl: "https://api.cartridge.gg/x/my-dojo-game-96/katana"
+    manifest: manifestDev, // Change to `manifestRelease` for release profile
+    toriiUrl: LOCAL_TORII, // Change to your Torii deployment url for release profile
+    rpcUrl: LOCAL_KATANA // Change to your Katana deployment url for release profile
 });
